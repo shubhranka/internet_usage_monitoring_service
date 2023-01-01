@@ -1,18 +1,16 @@
 from django.db import models
 
+# User Model
+class User(models.Model):
+    username = models.CharField(max_length=100)
+
+# User Usage Model
 class UserUsage(models.Model):
 
-    username = models.CharField(max_length=100)    
+    username = models.ForeignKey(User, on_delete=models.CASCADE)   
     mac_address = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     usage_time = models.DurationField()
     upload = models.BigIntegerField()
     download = models.BigIntegerField()
-
-    class Meta:
-        verbose_name = _("UserUsage")
-        verbose_name_plural = _("UserUsages")
-
-    def __str__(self):
-        return self.name
 
